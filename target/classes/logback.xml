@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<property name="PATTERN"
+		value="%d{yyyy-MM-dd HH:mm:ss.SSS}|＜%-5level＞|＜%class{50}＞|＜%M＞	|[L:%L]|%msg%n" />
+
+	<property name="LOG_HOME" value="/opt/log4j/OrderParts" />
+
+	<appender name="CONSOLE"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${PATTERN}</pattern>
+		</layout>
+
+	</appender>
+	
+	<appender name="INFO"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		
+		<!--日誌名,指定最新的文件名，其他文件名使用FileNamePattern -->
+		<file>${LOG_HOME}/OrderParts_info.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${LOG_HOME}/OrderParts_info-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<!-- each file should be at most 100MB, keep 60 days worth of history, 
+				but at most 2GB -->
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>180</maxHistory>
+		</rollingPolicy>
+		<!-- <layout class="ch.qos.logback.classic.PatternLayout"> <pattern>${PATTERN}</pattern> 
+			</layout> -->
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="ERROR"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 過濾器，只記錄ERROR級別的日誌 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+		<!--日誌名,指定最新的文件名，其他文件名使用FileNamePattern -->
+		<file>${LOG_HOME}/OrderParts_error.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${LOG_HOME}/OrderParts_error-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<!-- each file should be at most 100MB, keep 60 days worth of history, 
+				but at most 2GB -->
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>180</maxHistory>
+		</rollingPolicy>
+		<!-- <layout class="ch.qos.logback.classic.PatternLayout"> <pattern>${PATTERN}</pattern> 
+			</layout> -->
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="DEBUG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 過濾器，只記錄DEBUG級別的日誌 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+		<!--日誌名,指定最新的文件名，其他文件名使用FileNamePattern -->
+		<file>${LOG_HOME}/OrderParts_debug.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${LOG_HOME}/OrderParts_debug-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<!-- each file should be at most 100MB, keep 60 days worth of history, 
+				but at most 2GB -->
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>180</maxHistory>
+		</rollingPolicy>
+		<!-- <layout class="ch.qos.logback.classic.PatternLayout"> <pattern>${PATTERN}</pattern> 
+			</layout> -->
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="WARN"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 過濾器，只記錄WARN級別的日誌 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+		<!--日誌名,指定最新的文件名，其他文件名使用FileNamePattern -->
+		<file>${LOG_HOME}/OrderParts_warn.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${LOG_HOME}/OrderParts_warn-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<!-- each file should be at most 100MB, keep 60 days worth of history, 
+				but at most 2GB -->
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>180</maxHistory>
+		</rollingPolicy>
+		<!-- <layout class="ch.qos.logback.classic.PatternLayout"> <pattern>${PATTERN}</pattern> 
+			</layout> -->
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<root>
+		<level value="INFO" />
+		<!-- 檔案格式 -->
+		 <appender-ref ref="CONSOLE"/>
+        <!-- 檔案輸出 -->
+        <appender-ref ref="INFO"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="DEBUG"/>
+        <appender-ref ref="WARN"/>
+        
+	</root>
+</configuration>
